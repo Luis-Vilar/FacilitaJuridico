@@ -22,9 +22,9 @@ module.exports = {
         .json({ message: "An error occurred while trying to get the clients" });
   },
   async create(req, res) {
-    const { name, email, phone } = req.body;
+    const { name, email, phone, latitud, longitud } = req.body;
     const client = await db
-      .query(CREATE_CLIENT, [name, email, phone])
+      .query(CREATE_CLIENT, [name, email, phone, latitud, longitud])
       .then((res) => {
         if (Object.keys(res).length === 0) {
           return null;
