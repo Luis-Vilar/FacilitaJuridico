@@ -3,6 +3,7 @@ const {
   CREATE_USER,
   GET_ALL_USERS,
   UPDATE_USER,
+  DELETE_USER,
 } = require("../database/querys/user.querys");
 const db = require("../database/db.conection");
 module.exports = {
@@ -64,6 +65,22 @@ module.exports = {
     }
   },
   async deleteOne(req, res) {
-    res.status(STATUS_CODES.OK).send("DELETE from user routes");
+    const { id } = req.params;
+    const userDeleted = await db.query(DELETE_USER, [id]).then((res) => {
+      if (Object.keys(res).length === 0) {
+        return null;
+      } else {
+        return res;
+      }
+    });
+    if (userDeleted) {
+      return res
+        .status(STATUS_CODES.OK)
+        .json({ message: "The next user has been deleted", user: userDeleted });
+    } else {
+      return res
+        .status(STATUS_CODES.NOT_FOUND)
+        .json({ message: `The user with id : ${id} does not exist in the database`});
+    }
   },
 };
