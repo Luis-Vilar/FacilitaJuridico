@@ -1,9 +1,9 @@
 module.exports = {
-  CREATE_USER:
+  CREATE_CLIENT:
     "INSERT INTO users (name, email, phone) VALUES ($1, $2, $3) RETURNING *",
-  DELETE_USER: "DELETE FROM users WHERE id = $1 RETURNING *",
-  GET_ALL_USERS: "SELECT * FROM users",
-  UPDATE_USER:
+  DELETE_CLIENT: "DELETE FROM users WHERE id = $1 RETURNING *",
+  GET_ALL_CLIENTS: "SELECT * FROM users",
+  UPDATE_CLIENT:
     "UPDATE users SET name = $1, email = $2, phone = $3 WHERE id = $4 RETURNING *",
   SELECT_BY_PHONE : "SELECT * FROM users WHERE phone = $1",
   SELECT_BY_EMAIL : "SELECT * FROM users WHERE email = $1",

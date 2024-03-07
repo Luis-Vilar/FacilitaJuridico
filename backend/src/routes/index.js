@@ -1,7 +1,7 @@
 const { Router } = require('express')
-const routes = new Router()
-const userRoutes = require('./user.routes')
+const router = new Router()
+const clientsRoutes = require('./clients.routes')
 
-routes.use(userRoutes)
+router.use([clientsRoutes])
 
-module.exports = routes
+module.exports = router

@@ -1,6 +1,6 @@
-const { STATUS_CODES } = require("../utils/app.utils");
+const { STATUS_CODES } = require("./app.utils");
 module.exports = {
-  bodyValidatorPostUser: (req, res, next) => {
+  bodyValidatorPostClient: (req, res, next) => {
     const { name, email, phone } = req.body;
     if (!name) {
       return res

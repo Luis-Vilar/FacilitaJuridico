@@ -1,14 +1,14 @@
 const { STATUS_CODES } = require("../utils/app.utils");
 const {
-  CREATE_USER,
-  GET_ALL_USERS,
-  UPDATE_USER,
-  DELETE_USER,
-} = require("../database/querys/user.querys");
+  CREATE_CLIENT,
+  GET_ALL_CLIENTS,
+  UPDATE_CLIENT,
+  DELETE_CLIENT,
+} = require("../database/querys/client.querys");
 const db = require("../database/db.conection");
 module.exports = {
   async getAll(req, res) {
-    const users = await db.query(GET_ALL_USERS).then((res) => {
+    const users = await db.query(GET_ALL_CLIENTS).then((res) => {
       if (Object.keys(res).length === 0) {
         return null;
       } else {
@@ -24,7 +24,7 @@ module.exports = {
   async create(req, res) {
     const { name, email, phone } = req.body;
     const user = await db
-      .query(CREATE_USER, [name, email, phone])
+      .query(CREATE_CLIENT, [name, email, phone])
       .then((res) => {
         if (Object.keys(res).length === 0) {
           return null;
@@ -45,7 +45,7 @@ module.exports = {
     const { id } = req.params;
     const { name, email, phone } = req.body;
     const user = await db
-      .query(UPDATE_USER, [name, email, phone, id])
+      .query(UPDATE_CLIENT, [name, email, phone, id])
       .then((res) => {
         if (Object.keys(res).length === 0) {
           return null;
@@ -66,7 +66,7 @@ module.exports = {
   },
   async deleteOne(req, res) {
     const { id } = req.params;
-    const userDeleted = await db.query(DELETE_USER, [id]).then((res) => {
+    const userDeleted = await db.query(DELETE_CLIENT, [id]).then((res) => {
       if (Object.keys(res).length === 0) {
         return null;
       } else {
@@ -80,7 +80,9 @@ module.exports = {
     } else {
       return res
         .status(STATUS_CODES.NOT_FOUND)
-        .json({ message: `The user with id : ${id} does not exist in the database`});
+        .json({
+          message: `The user with id : ${id} does not exist in the database`,
+        });
     }
   },
 };

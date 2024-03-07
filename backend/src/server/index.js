@@ -1,7 +1,7 @@
 require("dotenv").config()
 const express = require("express");
 const app = express();
-const routes = require("../routes/index");
+const router = require("../routes/index");
 
 const db = require("../database/db.conection");
 
@@ -15,7 +15,7 @@ class Server {
     this.port = process.env.PORT || 3000;
   }
   route(app) {
-    app.use(routes);
+    app.use(router);
   }
   dbTestConection() {
      db
