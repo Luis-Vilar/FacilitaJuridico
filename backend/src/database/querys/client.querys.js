@@ -1,6 +1,6 @@
 module.exports = {
   CREATE_CLIENT:
-    "INSERT INTO clients (name, email, phone) VALUES ($1, $2, $3) RETURNING *",
+    "INSERT INTO clients (name, email, phone, latitud, longitud) VALUES ($1, $2, $3, $4, $5) RETURNING *",
   DELETE_CLIENT: "DELETE FROM clients WHERE id = $1 RETURNING *",
   GET_ALL_CLIENTS: "SELECT * FROM clients",
   UPDATE_CLIENT:
