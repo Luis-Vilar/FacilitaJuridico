@@ -1,9 +1,14 @@
 const { STATUS_CODES } = require("../utils/app.utils");
-const { CREATE_USER } = require("../database/querys/user.querys");
+const { CREATE_USER,GET_ALL_USERS  } = require("../database/querys/user.querys");
 const db = require("../database/db.conection");
 module.exports = {
   async getAll(req, res) {
-    res.status(STATUS_CODES.OK).send("GET from user routes");
+    const users = await db.query(GET_ALL_USERS);
+    if (users) return res.status(STATUS_CODES.OK).json(users);
+    else
+      return res
+        .status(STATUS_CODES.INTERNAL_SERVER_ERROR)
+        .json({ message: "An error occurred while trying to get the users" });
   },
   async create(req, res) {
     const { name, email, phone } = req.body;
