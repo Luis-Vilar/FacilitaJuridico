@@ -12,7 +12,7 @@ const {bodyValidatorPostUser} = require("../utils/user.utils");
 
 userRoutes.get(basePath, getAll);
 userRoutes.post(basePath,bodyValidatorPostUser ,create);
-userRoutes.put(basePath, update);
-userRoutes.delete(basePath, deleteOne);
+userRoutes.put(`${basePath}/:id`, update);
+userRoutes.delete(`${basePath}/:id`, deleteOne);
 
 module.exports = userRoutes;
