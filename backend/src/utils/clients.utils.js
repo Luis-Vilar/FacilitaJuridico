@@ -1,7 +1,7 @@
 const { STATUS_CODES } = require("./app.utils");
 module.exports = {
   bodyValidatorPostClient: (req, res, next) => {
-    const { name, email, phone } = req.body;
+    const { name, email, phone, latitud, longitud } = req.body;
     if (!name) {
       return res
         .status(STATUS_CODES.BAD_REQUEST)
@@ -17,6 +17,16 @@ module.exports = {
         .status(STATUS_CODES.BAD_REQUEST)
         .json({ message: "phone is required" });
     }
+    if (!latitud) {
+      return res
+        .status(STATUS_CODES.BAD_REQUEST)
+        .json({ message: "latitud is required" });
+    }
+    if (!longitud) {
+      return res
+        .status(STATUS_CODES.BAD_REQUEST)
+        .json({ message: "longitud is required" });
+    }
     if(typeof name !== "string"){
       return res
       .status(STATUS_CODES.BAD_REQUEST)
@@ -31,6 +41,16 @@ module.exports = {
       return res
       .status(STATUS_CODES.BAD_REQUEST)
       .json({ message: "phone must be a string" });
+    }
+    if(typeof latitud !== "number"){
+      return res
+      .status(STATUS_CODES.BAD_REQUEST)
+      .json({ message: "latitud must be a number" });
+    }
+    if(typeof longitud !== "number"){
+      return res
+      .status(STATUS_CODES.BAD_REQUEST)
+      .json({ message: "longitud must be a number" });
     }
     next();
   },
