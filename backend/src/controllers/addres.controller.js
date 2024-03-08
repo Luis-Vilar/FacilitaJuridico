@@ -13,8 +13,8 @@ module.exports = {
     });
     if (!clients)
       return res
-        .status(STATUS_CODES.INTERNAL_SERVER_ERROR)
-        .json({ message: "An error occurred while trying to get the clients" });
+        .status(STATUS_CODES.NOT_FOUND)
+        .json({ message: "Not clients found in the database" });
 
     const routes = calculateRoute(clients);
     return res.status(STATUS_CODES.OK).json(routes);
