@@ -34,14 +34,14 @@ function Cadastro() {
     }
   };
   return (
-    <Container className="p-4">
+    <Container  className="p-4">
       <h1>Cadastro de Clientes</h1>
       <Form onSubmit={handleSubmit}>
         <Form.Group className="mb-3">
           <Form.Label>Nome</Form.Label>
           <Form.Control
             type="string"
-            placeholder="Informe seu nome"
+            placeholder="Informe Nome"
             required={true}
             id="name"
           />
