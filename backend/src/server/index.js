@@ -2,6 +2,7 @@ require("dotenv").config()
 const express = require("express");
 const app = express();
 const router = require("../routes/index");
+const cors = require("cors");
 
 const db = require("../database/db.conection");
 
@@ -10,6 +11,7 @@ class Server {
   constructor() {
     this.app = app;
     this.app.use(express.json());
+    this.app.use(cors());
     this.route(this.app);
     this.dbTestConection();
     this.port = process.env.PORT || 3000;
