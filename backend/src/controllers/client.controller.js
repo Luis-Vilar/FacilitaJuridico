@@ -22,8 +22,8 @@ module.exports = {
     if (client) return res.status(STATUS_CODES.OK).json(client);
     else
       return res
-        .status(STATUS_CODES.INTERNAL_SERVER_ERROR)
-        .json({ message: "An error occurred while trying to get the clients" });
+        .status(STATUS_CODES.NOT_FOUND)
+        .json({ message: "No clients get in the database, please first insert one.." });
   },
   async create(req, res) {
     const { name, email, phone, latitud, longitud } = req.body;
