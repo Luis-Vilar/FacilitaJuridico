@@ -3,7 +3,7 @@ function TableComponent({ data }) {
   const keys = Object.keys(data[0]);
 
   return (
-    <Table striped bordered hover>
+    <Table striped bordered hover responsive="sm">
       <thead>
         <tr>
           {keys.map((key, index) => (
