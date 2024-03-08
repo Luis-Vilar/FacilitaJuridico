@@ -4,6 +4,7 @@ const {
   GET_ALL_CLIENTS,
   UPDATE_CLIENT,
   DELETE_CLIENT,
+  SELECT_BY_EMAIL
 } = require("../database/querys/client.querys");
 const db = require("../database/db.conection");
 module.exports = {
@@ -85,4 +86,24 @@ module.exports = {
         });
     }
   },
+  async findByEmail(req, res, next) {
+    const { email } = req.query;
+    if (!email) {
+      return next();
+    }
+    const client = await db.query(SELECT_BY_EMAIL, [email]).then((res) => {
+      if (Object.keys(res).length === 0) {
+        return null;
+      } else {
+        return res;
+      }
+    });
+    if (client) {
+      return res.status(STATUS_CODES.OK).json(client);
+    } else {
+      return res
+        .status(STATUS_CODES.NOT_FOUND)
+        .json({ message: `The client with email : ${email} does not exist` });
+    }
+  }
 };
