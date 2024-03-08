@@ -27,6 +27,12 @@ module.exports = {
   },
   async create(req, res) {
     const { name, email, phone, latitud, longitud } = req.body;
+    const existingClient = await db.query(SELECT_BY_EMAIL, [email]);
+    if (Object.keys(existingClient).length !== 0) {
+      return res.status(STATUS_CODES.CONFLICT).json({
+        message: `The client with email : ${email} already exists`,
+      });
+    }
     const client = await db
       .query(CREATE_CLIENT, [name, email, phone, latitud, longitud])
       .then((res) => {
@@ -41,11 +47,9 @@ module.exports = {
         .status(STATUS_CODES.CREATED)
         .json({ message: "A new client has by created", client });
     else
-      return res
-        .status(STATUS_CODES.INTERNAL_SERVER_ERROR)
-        .json({
-          message: "An error occurred while trying to insert the client",
-        });
+      return res.status(STATUS_CODES.INTERNAL_SERVER_ERROR).json({
+        message: "An error occurred while trying to insert the client",
+      });
   },
   async update(req, res) {
     const { id } = req.params;
@@ -65,11 +69,9 @@ module.exports = {
         .status(STATUS_CODES.OK)
         .json({ message: "The client has been updated", client });
     } else {
-      return res
-        .status(STATUS_CODES.INTERNAL_SERVER_ERROR)
-        .json({
-          message: "An error occurred while trying to update the client",
-        });
+      return res.status(STATUS_CODES.INTERNAL_SERVER_ERROR).json({
+        message: "An error occurred while trying to update the client",
+      });
     }
   },
   async deleteOne(req, res) {
@@ -119,7 +121,7 @@ module.exports = {
     nameLowerCase = name.toLowerCase();
     nameCapitalized =
       nameLowerCase.charAt(0).toUpperCase() + nameLowerCase.slice(1);
-  
+
     const client = await db
       .query(SELECT_BY_NAME, [`%${nameLowerCase}%`, `%${nameCapitalized}%`])
       .then((res) => {
