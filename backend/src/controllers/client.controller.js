@@ -4,7 +4,8 @@ const {
   GET_ALL_CLIENTS,
   UPDATE_CLIENT,
   DELETE_CLIENT,
-  SELECT_BY_EMAIL
+  SELECT_BY_EMAIL,
+  SELECT_BY_NAME,
 } = require("../database/querys/client.querys");
 const db = require("../database/db.conection");
 module.exports = {
@@ -104,6 +105,28 @@ module.exports = {
       return res
         .status(STATUS_CODES.NOT_FOUND)
         .json({ message: `The client with email : ${email} does not exist` });
+    }
+  },
+  async findByName(req, res, next) {
+    const { name } = req.query;
+    nameLowerCase = name.toLowerCase();
+    nameCapitalized = nameLowerCase.charAt(0).toUpperCase() + nameLowerCase.slice(1);
+    if (!name) {
+      return next();
+    }
+    const client = await db.query(SELECT_BY_NAME, [`%${nameLowerCase}%`,`%${nameCapitalized}%`]).then((res) => {
+      if (Object.keys(res).length === 0) {
+        return null;
+      } else {
+        return res;
+      }
+    });
+    if (client) {
+      return res.status(STATUS_CODES.OK).json(client);
+    } else {
+      return res
+        .status(STATUS_CODES.NOT_FOUND)
+        .json({ message: `The client with name : ${name} does not exist` });
     }
   }
 };
