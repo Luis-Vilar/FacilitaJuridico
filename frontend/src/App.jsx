@@ -1,7 +1,8 @@
+import Header from "./components/Header";
 function App() {
   return (
     <>
-      <h1>Desafio Facilita Juridico </h1>
+      <Header />
     </>
   );
 }
