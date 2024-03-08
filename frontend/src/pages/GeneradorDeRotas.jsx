@@ -1,9 +1,5 @@
-import React from 'react'
-
 function GeneradorDeRotas() {
-  return (
-    <div>GeneradorDeRotas</div>
-  )
+  return <div>GeneradorDeRotas</div>;
 }
 
-export default GeneradorDeRotas
+export default GeneradorDeRotas;

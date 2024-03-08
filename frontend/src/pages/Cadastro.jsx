@@ -1,9 +1,5 @@
-import React from 'react'
-
 function Cadastro() {
-  return (
-    <div>Cadastro</div>
-  )
+  return <div>Cadastro</div>;
 }
 
-export default Cadastro
+export default Cadastro;
