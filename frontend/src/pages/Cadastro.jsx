@@ -4,21 +4,7 @@ import { endpoints } from "../utils/endpoints.backend";
 const { POST_CLIENTS } = endpoints;
 
 function Cadastro() {
-  const postUser = async (data) => {
-    let sucess = false;
-    try {
-      const response = await axios.post(POST_CLIENTS, data);
-      if (response.status === 201) {
-        alert("Cliente cadastrado com sucesso");
-      }
-      sucess = true;
-    } catch (error) {
-      alert("Erro ao cadastrar cliente");
-    }
-    return sucess;
-  };
-
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
     const { name, email, phone, latitud, longitud } = event.target.elements;
     const data = {
@@ -28,13 +14,19 @@ function Cadastro() {
       latitud: parseFloat(latitud.value),
       longitud: parseFloat(longitud.value),
     };
-    const sucess = postUser(data);
-    if (sucess) {
-      event.target.reset();
+    try {
+      const response = await axios.post(POST_CLIENTS, data);
+      if (response.status === 201) {
+        alert("Cliente cadastrado com sucesso");
+        event.target.reset();
+      }
+    } catch (error) {
+      const { data, status } = error.response;
+      alert(`Erro ${status}: ${data.message}`);
     }
   };
   return (
-    <Container  className="p-4">
+    <Container className="p-4">
       <h1>Cadastro de Clientes</h1>
       <Form onSubmit={handleSubmit}>
         <Form.Group className="mb-3">
