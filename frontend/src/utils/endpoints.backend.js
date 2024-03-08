@@ -5,4 +5,5 @@ const BASE_URL = "http://localhost:3000";
 // Endpoints para consumo da API
 export const endpoints = {
   GET_BEST_ROUTE: `${BASE_URL}/addres`,
+  POST_CLIENTS: `${BASE_URL}/clients`,
 };
