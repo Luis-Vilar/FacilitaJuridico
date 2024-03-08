@@ -7,12 +7,13 @@ const {
   getAll,
   update,
   findByEmail,
-  findByName
+  findByName,
+  findByPhone
 } = require("../controllers/client.controller");
 
 const {bodyValidatorPostClient} = require("../utils/clients.utils");
 
-clientsRoutes.get(basePath,findByEmail,findByName, getAll);
+clientsRoutes.get(basePath,findByEmail,findByName,findByPhone, getAll);
 clientsRoutes.post(basePath,bodyValidatorPostClient ,create);
 clientsRoutes.put(`${basePath}/:id`, update);
 clientsRoutes.delete(`${basePath}/:id`, deleteOne);
