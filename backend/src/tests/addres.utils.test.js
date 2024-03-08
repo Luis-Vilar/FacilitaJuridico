@@ -25,33 +25,34 @@ const mokedUsers = [
     longitud: 5,
   },
 ];
-const expectedRoute = [
-  {
-    id: 2,
-    name: "John",
-    mail: "email@dominio.com",
-    phone: "123456789",
-    latitud: 1,
-    longitud: 1,
-  },
-  {
-    id: 1,
-    name: "Jane",
-    mail: "other@dominio.com",
-    phone: "987654321",
-    latitud: 2,
-    longitud: 2,
-  },
-  {
-    id: 3,
-    name: "Jane",
-    mail: "jane@email.com",
-    phone: "987654321",
-    latitud: 2,
-    longitud: 5,
-  },
-];
+
 describe("Testing of addres.utils", () => {
+  const expectedRoute = [
+    {
+      id: 2,
+      name: "John",
+      mail: "email@dominio.com",
+      phone: "123456789",
+      latitud: 1,
+      longitud: 1,
+    },
+    {
+      id: 1,
+      name: "Jane",
+      mail: "other@dominio.com",
+      phone: "987654321",
+      latitud: 2,
+      longitud: 2,
+    },
+    {
+      id: 3,
+      name: "Jane",
+      mail: "jane@email.com",
+      phone: "987654321",
+      latitud: 2,
+      longitud: 5,
+    },
+  ];
   test("Should return the best route of all ussers", () => {
     const bestRoute = calculateRoute(mokedUsers);
     expect(bestRoute).toEqual(expectedRoute);
