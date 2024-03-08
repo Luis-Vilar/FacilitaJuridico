@@ -7,6 +7,7 @@ const {
   SELECT_BY_EMAIL,
   SELECT_BY_NAME,
   SELECT_BY_PHONE,
+  SELECT_BY_ID,
 } = require("../database/querys/client.querys");
 const db = require("../database/db.conection");
 module.exports = {
@@ -154,6 +155,23 @@ module.exports = {
       return res
         .status(STATUS_CODES.NOT_FOUND)
         .json({ message: `The client with phone : ${phone} does not exist` });
+    }
+  },
+  async findById(req, res) {
+    const { id } = req.params;
+    const client = await db.query(SELECT_BY_ID, [id]).then((res) => {
+      if (Object.keys(res).length === 0) {
+        return null;
+      } else {
+        return res;
+      }
+    });
+    if (client) {
+      return res.status(STATUS_CODES.OK).json(client);
+    } else {
+      return res
+        .status(STATUS_CODES.NOT_FOUND)
+        .json({ message: `The client with id : ${id} does not exist` });
     }
   },
 };
