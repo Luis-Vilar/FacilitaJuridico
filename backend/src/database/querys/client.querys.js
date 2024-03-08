@@ -8,5 +8,5 @@ module.exports = {
   SELECT_BY_PHONE : "SELECT * FROM clients WHERE phone = $1",
   SELECT_BY_EMAIL : "SELECT * FROM clients WHERE email = $1",
   SELECT_BY_ID : "SELECT * FROM clients WHERE id = $1",
-  SELECT_BY_NAME : "SELECT * FROM clients WHERE name = $1",
+  SELECT_BY_NAME : "SELECT * FROM clients WHERE name LIKE $1 OR name LIKE $2",
 };
