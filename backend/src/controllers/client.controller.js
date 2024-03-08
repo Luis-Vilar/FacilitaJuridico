@@ -6,6 +6,7 @@ const {
   DELETE_CLIENT,
   SELECT_BY_EMAIL,
   SELECT_BY_NAME,
+  SELECT_BY_PHONE,
 } = require("../database/querys/client.querys");
 const db = require("../database/db.conection");
 module.exports = {
@@ -37,11 +38,13 @@ module.exports = {
     if (client)
       return res
         .status(STATUS_CODES.CREATED)
-        .json({ message: "A new client has by created",  client });
+        .json({ message: "A new client has by created", client });
     else
       return res
         .status(STATUS_CODES.INTERNAL_SERVER_ERROR)
-        .json({ message: "An error occurred while trying to insert the client" });
+        .json({
+          message: "An error occurred while trying to insert the client",
+        });
   },
   async update(req, res) {
     const { id } = req.params;
@@ -59,11 +62,13 @@ module.exports = {
     if (client) {
       return res
         .status(STATUS_CODES.OK)
-        .json({ message: "The client has been updated",  client });
+        .json({ message: "The client has been updated", client });
     } else {
       return res
         .status(STATUS_CODES.INTERNAL_SERVER_ERROR)
-        .json({ message: "An error occurred while trying to update the client" });
+        .json({
+          message: "An error occurred while trying to update the client",
+        });
     }
   },
   async deleteOne(req, res) {
@@ -78,13 +83,11 @@ module.exports = {
     if (clientDeleted) {
       return res
         .status(STATUS_CODES.OK)
-        .json({ message: "The next client has been deleted",  clientDeleted });
+        .json({ message: "The next client has been deleted", clientDeleted });
     } else {
-      return res
-        .status(STATUS_CODES.NOT_FOUND)
-        .json({
-          message: `The client with id : ${id} does not exist in the database`,
-        });
+      return res.status(STATUS_CODES.NOT_FOUND).json({
+        message: `The client with id : ${id} does not exist in the database`,
+      });
     }
   },
   async findByEmail(req, res, next) {
@@ -109,12 +112,36 @@ module.exports = {
   },
   async findByName(req, res, next) {
     const { name } = req.query;
-    nameLowerCase = name.toLowerCase();
-    nameCapitalized = nameLowerCase.charAt(0).toUpperCase() + nameLowerCase.slice(1);
     if (!name) {
       return next();
     }
-    const client = await db.query(SELECT_BY_NAME, [`%${nameLowerCase}%`,`%${nameCapitalized}%`]).then((res) => {
+    nameLowerCase = name.toLowerCase();
+    nameCapitalized =
+      nameLowerCase.charAt(0).toUpperCase() + nameLowerCase.slice(1);
+  
+    const client = await db
+      .query(SELECT_BY_NAME, [`%${nameLowerCase}%`, `%${nameCapitalized}%`])
+      .then((res) => {
+        if (Object.keys(res).length === 0) {
+          return null;
+        } else {
+          return res;
+        }
+      });
+    if (client) {
+      return res.status(STATUS_CODES.OK).json(client);
+    } else {
+      return res
+        .status(STATUS_CODES.NOT_FOUND)
+        .json({ message: `The client with name : ${name} does not exist` });
+    }
+  },
+  async findByPhone(req, res, next) {
+    const { phone } = req.query;
+    if (!phone) {
+      return next();
+    }
+    const client = await db.query(SELECT_BY_PHONE, [phone]).then((res) => {
       if (Object.keys(res).length === 0) {
         return null;
       } else {
@@ -126,7 +153,7 @@ module.exports = {
     } else {
       return res
         .status(STATUS_CODES.NOT_FOUND)
-        .json({ message: `The client with name : ${name} does not exist` });
+        .json({ message: `The client with phone : ${phone} does not exist` });
     }
-  }
+  },
 };
