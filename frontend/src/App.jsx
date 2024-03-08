@@ -15,9 +15,8 @@ function App() {
       <Header />
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<Table data={clients} />} />
+          <Route path="/"  element={<Busca />} />
           <Route path="/cadastro" element={<Cadastro />} />
-          <Route path="/buscar" element={<Busca />} />
           <Route path="/generador/melhorRota" element={<GeneradorDeRotas />} />
         </Routes>
       </BrowserRouter>

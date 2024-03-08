@@ -18,10 +18,10 @@ function Header() {
         </Navbar.Brand>
         <Navbar.Toggle className="justify-content-end" />
         <Navbar.Collapse className="justify-content-end">
-          <Nav >
+          <Nav>
             <Nav.Link href="/cadastro">Cadastrar CLientes</Nav.Link>
-            <Nav.Link href="/buscar">Buscar Clientes</Nav.Link>
-            <Nav.Link href="/generador/melhorRota">Generar Ruta</Nav.Link>
+            <Nav.Link href="/">Buscar Clientes</Nav.Link>
+            <Nav.Link href="/generador/melhorRota">Gerar Rotas</Nav.Link>
           </Nav>
         </Navbar.Collapse>
       </Container>
