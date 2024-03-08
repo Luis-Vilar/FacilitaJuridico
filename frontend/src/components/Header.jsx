@@ -1,12 +1,12 @@
 import Container from "react-bootstrap/Container";
-import Navbar from "react-bootstrap/Navbar";
+import {Navbar, Nav} from "react-bootstrap";
 import logo from "../assets/logo.png";
 
 function Header() {
   return (
     <Navbar bg="dark" variant="dark">
       <Container>
-        <Navbar.Brand href="#home">
+        <Navbar.Brand href="/">
           <img
             alt="Logo Fake da Facilita Jurídico"
             src={logo}
@@ -16,6 +16,11 @@ function Header() {
           />
           Facilita Jurídico
         </Navbar.Brand>
+        <Nav className="me-auto">
+            <Nav.Link href="/cadastro">Cadastrar CLientes</Nav.Link>
+            <Nav.Link href="/buscar">Buscar Clientes</Nav.Link>
+            <Nav.Link href="/generador/melhorRota">Generar Ruta</Nav.Link>
+          </Nav>
       </Container>
     </Navbar>
   );
