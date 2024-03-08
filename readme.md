@@ -12,7 +12,7 @@ Meu Portafolio.
 ## Consideraçoes y dicas Previas .
 
 <p>
-Precisamos ter instaladas as seguintes ferramentas e frameworks previamente a começar com a clonagem e posta em marcha deste repositório: `Node.js v12 ou superior`, `PostgreSQL v12.2 ou superior`, um terminal shell (como o zsh com os plugins do ohmyzsh instalados, por exemplo). Dependendo do seu sistema operativo, você pode precisar de privilégios de usuário mais elevados para instalar o Node.js. Caso você não queira instalar o PostgreSQL em sua máquina, considere criar um contêiner Docker com este banco de dados. Se preferir, entre em contato comigo para obter um arquivo docker-compose que criará automaticamente uma instância configurada previamente. Outra opção é criar um banco de dados no serviço de hospedagem de banco de dados ElephantSQL (https://www.elephantsql.com/), que fornece uma string de conexão. Para fins de teste, eles oferecem um plano gratuito com uma base de dados de 10 MB, o que é mais do que suficiente. Essas outras abordagens de banco de dados não serão abordadas nesta documentação para manter o foco no objetivo principal. Seja bem-vindo! Prepare seu café e vamos começar juntos...
+Precisamos ter instaladas as seguintes ferramentas e frameworks previamente a começar com a clonagem e posta em marcha deste repositório: `Node.js v20 ou superior`, `PostgreSQL v16.2 ou superior`, um terminal shell (como o zsh com os plugins do ohmyzsh instalados, por exemplo). Dependendo do seu sistema operativo, você pode precisar de privilégios de usuário mais elevados para instalar o Node.js. Caso você não queira instalar o PostgreSQL em sua máquina, considere criar um contêiner Docker com este banco de dados. Se preferir, entre em contato comigo para obter um arquivo docker-compose que criará automaticamente uma instância configurada previamente. Outra opção é criar um banco de dados no serviço de hospedagem de banco de dados ElephantSQL (https://www.elephantsql.com/), que fornece uma string de conexão. Para fins de teste, eles oferecem um plano gratuito com uma base de dados de 10 MB, o que é mais do que suficiente. Essas outras abordagens de banco de dados não serão abordadas nesta documentação para manter o foco no objetivo principal. Seja bem-vindo! Prepare seu café e vamos começar juntos...
 </p>
 
 ## Clonando o repositorio
@@ -251,7 +251,13 @@ Após instalar as dependências e verificar se a URL base do backend está corre
 Tenha a consideraçao que dependendo da sua escolha a porta onde sera executada a aplicaçao sera diferente, para um ambiente de desenvolvimento o FronEnd estara disponivel no endereço http://localhost:5173/ e para o preview em http://localhost:4173/, neste ponto, deveriamos ter tanto o front como o back rodando, se visitar desde seu navegador de preferencia as URL anteriormente mensionadas dependendo de sua escolha, podera observar a rendericaçao da rota inicial que vai  por padrão para a busca de clientes na aplicaçao,  e caso voce não tenha cadastrados ainda neum cliente por meio de um cliente Rest como Thundeclient ou Insomia devera visualizar a siguiente tela...
 </p>
 
---insertar foto da rota / sin clientes cadastrados 
+## DESKTOP
+
+![image](https://github.com/Luis-Vilar/FacilitaJuridico/assets/124309725/15dbc547-c11a-47be-ba74-cdf15c25b659)
+
+## MOBILE
+
+![image](https://github.com/Luis-Vilar/FacilitaJuridico/assets/124309725/a916e81b-ad2e-4977-b929-0c909622a882)
 
 
 <p>
@@ -259,21 +265,39 @@ No header no canto direito da sua tela temos os links para Cadastrar Clientes, B
 Voltando ao ponto, a tela de cadastro de clientes e como mostrado na siguiente imagem...
 </p>
 
--- inserta imagen de cadastro de clientes
+## DESKTOP
+
+![image](https://github.com/Luis-Vilar/FacilitaJuridico/assets/124309725/4a1a7669-4b7c-42a4-870f-cea7ceb6ed4c)
+
+## MOBILE
+
+![image](https://github.com/Luis-Vilar/FacilitaJuridico/assets/124309725/785ad87c-b9d0-4d20-966c-2f4a00059fde)
+
+
+
 
 <p>
 Uma vez tenha cadastrado os clientes que ache nessesario, podemos voltar a tela de Buscar Clientes para testar as funcionalidades, aqui pode-se buscar clientes na Base de Dados , na primera aba que e a padrão mostra-se todos os clientes , e não tem parametros de busca que possam ser colocados, nas outras abas você pode fazer a filtragem dos clientes cadastrados por nome, email ou telefone nestes casos, apos de realizar uma filtragem que devolva clientes aparecera na tela um botão para limpar a busca, no caso de nomes o BackEnd devolvera os clientes que tenham nomes parecidos com o informado tanto em minuscula como capitalizado, por exemplo se realizar uma busca por luis ele devolvera todos os clientes que no seu nome tenha tanto a palabra luis como Luis, imagine que tem um cliente Luis e outro Mariluise ambos seram considerados como matches de busca validos, ja no caso do telefone e o email a busca e mais restrita , devera se informar exatamente igual a como esta cadastrado na base de dados por que na minha logica de negocios estes dados especificos de cada cliente, e o email ainda mais especifico por que geralmente este e um meio de comunicaçao pessoal e nao de uso comun como poderia ser o telefone de uma residencia e por isso nao quis devolver telefones ou email´s com as mesmas regras de negocio que como as do nome.
 A continuaçao podera ver alguns exemplos de esta tela nas siguientes imagens
 </p>
 
--- insertar imagenes de busquedas
+![image](https://github.com/Luis-Vilar/FacilitaJuridico/assets/124309725/7378a0ce-6baa-4093-b550-8c92e700ccc5)
+
+![image](https://github.com/Luis-Vilar/FacilitaJuridico/assets/124309725/562d3627-8b0d-40ea-bd32-3632e5db9949)
+
+![image](https://github.com/Luis-Vilar/FacilitaJuridico/assets/124309725/24527b80-ca5a-49bb-8190-2ca6e9e73e52)
+
+![image](https://github.com/Luis-Vilar/FacilitaJuridico/assets/124309725/e8b124bf-b0fc-4e88-9de1-a8b4ddd24063)
+
+![image](https://github.com/Luis-Vilar/FacilitaJuridico/assets/124309725/26ce3c4a-b961-4161-b4cf-002fca78f06d)
+
 
 <p>
 Por último, podemos conhecer a funcionalidade de Gerar rota, esta é a mais simples do FrontEnd e talvez a mais difícil do BackEnd. No Front, quando clicar no link de Gerar Rota, apenas faz uma requisição para a rota do BackEnd onde será devolvido um array de usuários ordenados desde o mais próximo à latitude/longitude 0,0 até o mais longe deste ponto, e no FrontEnd será renderizada uma tabela com esta ordem, desde a parte superior da tabela com os mais próximos e na parte inferior da tabela com os mais distantes, assim o usuário poderá visitar os clientes um a um seguindo esta ordem.
 </p>
 
 
---- insertar imagenes del generador de rotas
+![image](https://github.com/Luis-Vilar/FacilitaJuridico/assets/124309725/793203aa-0647-4d54-8a2f-ff33937e53d8)
 
 
 
