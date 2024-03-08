@@ -6,4 +6,5 @@ const BASE_URL = "http://localhost:3000";
 export const endpoints = {
   GET_BEST_ROUTE: `${BASE_URL}/addres`,
   POST_CLIENTS: `${BASE_URL}/clients`,
+  GET_CLIENTS: `${BASE_URL}/clients`,
 };
