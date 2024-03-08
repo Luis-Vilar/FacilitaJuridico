@@ -4,7 +4,7 @@
   "description": "A simple REST API for managing clients",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Message: no test specified\" && exit 0",
+    "test":"jest --watchAll",
     "start": "node  src/index.js",
     "dev": "nodemon src/ index.js"
   },
@@ -18,7 +18,9 @@
   },
   "devDependencies": {
     "@types/express": "^4.17.21",
+    "@types/jest": "^29.5.12",
     "@types/pg-promise": "^5.4.3",
+    "jest": "^29.7.0",
     "nodemon": "^3.1.0"
   }
 }
